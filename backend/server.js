@@ -22,7 +22,6 @@ app.get("/", (req, res) => {
 });
 
 // SCHEMAS; putting user schemas here due module can't be resolved..
-
 // USER SCHEMA
 const UserSchema = new mongoose.Schema({
   username: {
@@ -56,11 +55,52 @@ const UserSchema = new mongoose.Schema({
     default: () => new Date(),
   },
 });
-// accessToken: {
-//   type: String,
-//   default: () => crypto.randomBytes(128).toString("hex")
-// },
+
 const User = mongoose.model("User", UserSchema);
+
+
+
+// PRODUCT SCHEMA
+const productSchema = new mongoose.Schema({
+  title: {
+    type: String,
+    required: true,
+  },
+  price: {
+    type: Number,
+    required: true,
+  },
+  description: {
+    type: String,
+    required: true,
+  },
+  category: {
+    type: Schema.Types.ObjectId,
+    ref: "Category",
+  },
+  countInStock: {
+    type: Number,
+    required: true,
+    default: 0,
+  },
+  images: [
+    {
+      type: String,
+      required: true,
+    },
+  ],
+  owner: {
+    type: Schema.Types.ObjectId,
+    ref: "User",
+  },
+  createdAt: {
+    type: Date,
+    required: true,
+  },
+});
+
+//module.exports = mongoose.model("Product", productSchema);
+const Product = mongoose.model("Product", productSchema);
 
 // USER LOGIN
 app.post("/login", async (req, res) => {
@@ -105,7 +145,7 @@ app.post("/register", async (req, res) => {
         username: username,
         password: bcrypt.hashSync(password, salt),
       }).save();
-      console.log(newUser);
+      //console.log(newUser);
       res.status(201).json({
         success: true,
         response: {
@@ -122,9 +162,66 @@ app.post("/register", async (req, res) => {
   }
 });
 
+ //GET PRODUCTS
+ app.get("/products", async (req, res)=> {
+  const products = await Product.find({});
+  if (products.length === 0) {
+    return res.status(404).json({
+      success: false,
+      message: "No products found."
+    });
+  }
+  res.status(200).json({
+    success: true,
+    message: "All products", 
+    response: products
+  }); 
+});
+
+// CREATE PRODUCTS
+app.post("/products", async (req, res) => {
+  try {
+    // Assuming req.body contains an array of product objects
+    const products = await Product.create(req.body);
+    res.status(201).json({
+      success: true,
+      message: "Products added successfully",
+      products: products
+    });
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      message: "Failed to add products",
+      error: err.message
+    });
+  }
+});
+
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // previous for mysql
 
@@ -251,3 +348,8 @@ app.listen(port, () => {
 // import bcrypt from 'bcrypt';
 // import mongoose from "mongoose";
 // import crypto from "crypto";
+
+// accessToken: {
+//   type: String,
+//   default: () => crypto.randomBytes(128).toString("hex")
+// },
