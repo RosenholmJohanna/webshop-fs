@@ -29,7 +29,7 @@ const Footer = () => {
 height: 20vh;
 margin:0;
 position: absolute;
-bottom:0;
+bottom:-100;
 width: 100%;
   `
 

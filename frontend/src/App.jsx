@@ -1,47 +1,41 @@
-import React, { useState } from 'react'
-import Login from './Components/Login'
-import Products from './Components/Products'
-import Header from './Components/Header'
-import Footer from './Components/Footer'
-import { Provider } from 'react-redux'
+import React, { useState } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Login from "./Components/Login";
+import Products from "./Components/Products";
+import Header from "./Components/Header";
+import Footer from "./Components/Footer";
+import { Provider } from "react-redux";
 //import store from './store'
-import './App.css'
-import user from './Reducers/user'
-import { configureStore } from '@reduxjs/toolkit'
+import "./App.css";
+import user from "./Reducers/user";
+import { configureStore } from "@reduxjs/toolkit";
 //import online from './assets/online.svg';
 
-
-const reducer = ({
+const reducer = {
   user: user.reducer,
-});
+};
 
-
-const store = configureStore({reducer});
+const store = configureStore({ reducer });
 
 function App() {
-  
-
   return (
-  <>
-    <Provider store={store}>
-      <Header />
-       <Login />
-       <Products />
-       <Footer />
-    </Provider>
-  </>
-  )
+    <BrowserRouter>
+      <Provider store={store}>
+         <Header /> 
+        <Routes>
+          <Route path="/" element={<Login />}></Route>
+          <Route path="/products" element={<Products />}></Route>
+        </Routes>
+        <Footer />
+      </Provider>
+    </BrowserRouter>
+  );
 }
 
-export default App
+export default App;
 
-
-
-
-
-
-
-{/* <div>
+{
+  /* <div>
 
 const [count, setCount] = useState(0)
 
@@ -63,4 +57,5 @@ const [count, setCount] = useState(0)
 </div>
 <p className="read-the-docs">
 Click on the Vite and React logos to learn more
-</p> */}
+</p> */
+}
