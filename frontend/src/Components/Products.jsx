@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import online from '../assets/online.svg';
 
@@ -9,7 +10,8 @@ const API_All_PRODUCTS = 'http://localhost:8080/products';
 // };
 
 const Products = () => {
-  const [products, setProducts] = useState([]);
+  const [allProducts, setAllProducts] = useState([]);
+  const { id } = useParams();
   
   useEffect(() => {
     async function fetchProducts() {
@@ -19,7 +21,7 @@ const Products = () => {
           throw new Error('Cannot fetch products');
         }
         const data = await response.json();
-        setProducts(data.response);
+        setAllProducts(data.response);
       } catch (error) {
         console.error(error);
       }
@@ -27,29 +29,31 @@ const Products = () => {
 
     fetchProducts();
   }, []); 
+
     return (
       <ProductsWrapper>
        <h1>Products</h1>
       
       <ul>
-        {products.map(product => (
+        {allProducts.map(product => (
           <List key={product._id}>
+            <Link to={`/product/${product._id}`}>
             <h2>{product.title}</h2>
             <img src={online} alt="Logo" width="250" height="162" />
             <p>{product.description}</p>
             <p>Price: {product.price} kr</p>
-           
-            {/* <img src={require(`../assets/${product.images}`).default}
-            alt='image'
-            /> */}
+
           <button>Details</button>
           <button>Buy</button>
           <button>💟</button>
+          </Link>
           </List>
         ))}
       </ul>
-    
+      {/* <Products allProducts={allProducts} /> */}
+      
       </ProductsWrapper>
+      
     )
   }
   
@@ -67,3 +71,7 @@ const Products = () => {
 
 
 {/* <p>{product.images[1]}</p> */}
+
+{/* <img src={require(`../assets/${product.images}`).default}
+            alt='image'
+            /> */}

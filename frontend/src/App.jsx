@@ -4,12 +4,13 @@ import Login from "./Components/Login";
 import Products from "./Components/Products";
 import Header from "./Components/Header";
 import Footer from "./Components/Footer";
+import ProductDetails from "./Components/ProductDetails";
 import { Provider } from "react-redux";
 //import store from './store'
 import "./App.css";
 import user from "./Reducers/user";
 import { configureStore } from "@reduxjs/toolkit";
-//import online from './assets/online.svg';
+
 
 const reducer = {
   user: user.reducer,
@@ -25,8 +26,9 @@ function App() {
         <Routes>
           <Route path="/" element={<Login />}></Route>
           <Route path="/products" element={<Products />}></Route>
+          <Route path='product/:id' element={<ProductDetails />} /> 
         </Routes>
-        <Footer />
+       <Footer />
       </Provider>
     </BrowserRouter>
   );

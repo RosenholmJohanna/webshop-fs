@@ -3,10 +3,11 @@ import styled from "styled-components";
 import Products from "./Products";
 import { Params } from "react-router-dom";
 
-const API_DETAIL_PRODUCTS = "http://localhost:8080/product/:id";
 
-const ProductDetail = () => {
-  return <></>;
+const ProductsList = () => {
+  return (
+    <></>
+  )
 };
 
-export default ProductDetail;
+export default ProductsList;
