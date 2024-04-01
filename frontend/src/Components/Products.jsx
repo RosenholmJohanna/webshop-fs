@@ -73,5 +73,5 @@ const Products = () => {
 {/* <p>{product.images[1]}</p> */}
 
 {/* <img src={require(`../assets/${product.images}`).default}
-            alt='image'
-            /> */}
+  alt='image'
+/> */}

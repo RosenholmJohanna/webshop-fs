@@ -1,5 +1,5 @@
 // import { configureStore } from '@reduxjs/toolkit'
-// import user from './Reducers/user'
+// import user / userReducer from './Reducers/user'
 
 
 // export default store ({
@@ -15,5 +15,12 @@
 //         }
 //     })
 // }
+
+
+// const store = configureStore({
+//     reducer: {
+//      user: userReducer
+//     },
+//   });
 
 // export default store

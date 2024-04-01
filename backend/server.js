@@ -72,10 +72,6 @@ const productSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  category: {
-    type: Schema.Types.ObjectId,
-    ref: "Category",
-  },
   countInStock: {
     type: Number,
     required: true,
@@ -99,6 +95,35 @@ const productSchema = new mongoose.Schema({
 
 //module.exports = mongoose.model("Product", productSchema);
 const Product = mongoose.model("Product", productSchema);
+
+// ORDER SCHEMA
+const orderSchema = new mongoose.Schema({
+  user: {
+    type: Schema.Types.ObjectId,
+    ref: "User",
+    required: true,
+  },
+  // products --> []
+  product: {
+    type: Schema.Types.ObjectId,
+    ref: "Product",
+    required: true,
+  },
+  quantity: {
+    type: Number,
+    default: 1,
+  },
+  totalPrice: {
+    type: Number,
+    required: true,
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
+});
+
+const Order = mongoose.model("Order", orderSchema);
 
 // USER LOGIN
 app.post("/login", async (req, res) => {
@@ -143,7 +168,6 @@ app.post("/register", async (req, res) => {
         username: username,
         password: bcrypt.hashSync(password, salt),
       }).save();
-      //console.log(newUser);
       res.status(201).json({
         success: true,
         response: {
@@ -202,30 +226,77 @@ app.get("/product/:id", async (req, res) => {
     const product = await Product.findById(productId);
 
     if (!product) {
-      return res
-        .status(404)
-        .json({ 
-          success: false,
-          message: "Product by ID not found"
-         });
+      return res.status(404).json({
+        success: false,
+        message: `Product by ${productId} not found`,
+      });
     }
 
-    res.status(200).json({ 
-      success: true, 
-      product 
+    res.status(200).json({
+      success: true,
+      product,
     });
-    
   } catch (error) {
-    res.status(500).json({ 
-      success: false, 
-      message: "Internal server error" });
+    res.status(500).json({
+      success: false,
+      message: "Internal server error",
+    });
   }
 });
 
+// // ORDER BY USER
+app.post("/buy/:userId/:productId", async (req, res) => {
+  const userId = req.params.userId;
+  const productId = req.params.productId;
+  const quantity = req.body.quantity || 1; // 1 by default if quantity not set
+
+  try {
+    const user = await User.findById(userId);
+    const product = await Product.findById(productId);
+
+    if (!user || !product) {
+      return res.status(404).json({
+         message: "user or product not found"
+      });
+    }
+
+    if (product.countInStock < quantity) {
+      return res.status(400).json({ 
+        message: "Product not in stock"
+      });
+    }
+
+    const totalPrice = product.price * quantity;
+
+    // Create order
+    const order = new Order({
+      user: userId,
+      product: productId,
+      quantity,
+      totalPrice,
+    });
+    //console.log(order);
+
+    user.orders.push(order);
+    product.countInStock -= quantity;
+
+    await order.save();
+    await user.save();
+    await product.save();
+
+    res.status(200).json({ 
+      message: "product bought successfully", order 
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      message: "Internal server error."
+    });
+  }
+});
 
 
 
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
 });
-

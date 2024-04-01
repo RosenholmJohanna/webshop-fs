@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Register from "./Components/Register";
 import Login from "./Components/Login";
 import Products from "./Components/Products";
 import Header from "./Components/Header";
@@ -15,8 +16,9 @@ import { configureStore } from "@reduxjs/toolkit";
 const reducer = {
   user: user.reducer,
 };
-
 const store = configureStore({ reducer });
+
+
 
 function App() {
   return (
@@ -24,7 +26,8 @@ function App() {
       <Provider store={store}>
          <Header /> 
         <Routes>
-          <Route path="/" element={<Login />}></Route>
+          <Route path="/" element={<Register />}></Route>
+          <Route path="/login" element={<Login />}></Route>
           <Route path="/products" element={<Products />}></Route>
           <Route path='product/:id' element={<ProductDetails />} /> 
         </Routes>

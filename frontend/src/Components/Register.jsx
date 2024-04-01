@@ -4,13 +4,15 @@ import { useNavigate } from "react-router-dom";
 import user from "../Reducers/user";
 import styled from "styled-components";
 
-const API_LOGIN = "http://localhost:8080/login";
+const API_REGISTER = "http://localhost:8080/register";
 
-const Login = () => {
+const Register = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  //const isLoading = useSelector(state => state.user.isLoading);
+  //const error = useSelector(state => state.user.error);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -24,14 +26,13 @@ const Login = () => {
         password: password,
       }),
     };
-    fetch(API_LOGIN, options)
+    fetch(API_REGISTER, options)
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {
-          dispatch(user.actions.setId(data.response.id));
           dispatch(user.actions.setUsername(data.response.username));
+          dispatch(user.actions.setId(data.response.id));
           navigate("/products");
-          //console.log(data)
         } else {
           console.log("Login failed");
           dispatch(user.actions.setUsername(null));
@@ -44,7 +45,7 @@ const Login = () => {
 
   return (
     <LoginWrapper>
-      <h3>Login here!</h3>
+      <h3>Welcome, register here!</h3>
 
       <form onSubmit={handleSubmit}>
         <div>
@@ -63,13 +64,16 @@ const Login = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-        <button type="submit">login</button>
+
+        <button type="submit">Register</button>
       </form>
+
+      <a>Already a user? Loggin here</a>
     </LoginWrapper>
   );
 };
 
-export default Login;
+export default Register;
 
 const LoginWrapper = styled.div`
   display: flexbox;
