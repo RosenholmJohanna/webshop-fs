@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import user from "../Reducers/user";
+import { user } from "../Reducers/user";
 import styled from "styled-components";
 
 const API_REGISTER = "http://localhost:8080/register";
@@ -12,7 +12,6 @@ const Register = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   //const isLoading = useSelector(state => state.user.isLoading);
-  //const error = useSelector(state => state.user.error);
 
   const handleSubmit = (event) => {
     event.preventDefault();

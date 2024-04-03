@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Register from "./Components/Register";
 import Login from "./Components/Login";
@@ -7,17 +7,19 @@ import Header from "./Components/Header";
 import Footer from "./Components/Footer";
 import ProductDetails from "./Components/ProductDetails";
 import { Provider } from "react-redux";
-//import store from './store'
 import "./App.css";
 import user from "./Reducers/user";
 import { configureStore } from "@reduxjs/toolkit";
+import { cartSlice } from "./Reducers/cartSlice";
+import Cart from "./Components/Cart";
+
 
 
 const reducer = {
   user: user.reducer,
+  cart: cartSlice.reducer
 };
 const store = configureStore({ reducer });
-
 
 
 function App() {
@@ -29,14 +31,14 @@ function App() {
           <Route path="/" element={<Register />}></Route>
           <Route path="/login" element={<Login />}></Route>
           <Route path="/products" element={<Products />}></Route>
-          <Route path='product/:id' element={<ProductDetails />} /> 
+          <Route path='product/:id' element={<ProductDetails />} />
         </Routes>
-       <Footer />
+        {/* <Cart />  */}
+       {/* <Footer /> */}
       </Provider>
     </BrowserRouter>
   );
 }
-
 export default App;
 
 {

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import user from "../Reducers/user";
+import { user } from "../Reducers/user";
 import styled from "styled-components";
 
 const API_LOGIN = "http://localhost:8080/login";
