@@ -12,6 +12,7 @@ import user from "./Reducers/user";
 import { configureStore } from "@reduxjs/toolkit";
 import { cartSlice } from "./Reducers/cartSlice";
 import Cart from "./Components/Cart";
+import Checkout from "./Components/Checkout";
 
 
 
@@ -32,6 +33,7 @@ function App() {
           <Route path="/login" element={<Login />}></Route>
           <Route path="/products" element={<Products />}></Route>
           <Route path='product/:id' element={<ProductDetails />} />
+          <Route path="/checkout" element={<Checkout />}></Route>
         </Routes>
         {/* <Cart />  */}
        {/* <Footer /> */}

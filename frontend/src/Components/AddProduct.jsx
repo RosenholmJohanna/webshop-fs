@@ -11,7 +11,9 @@ export const AddProduct = ({ productDetail }) => {
   
     useEffect(() => {
       setCurrentProduct(productDetail);
-    }, [productDetail], console.log('use Effect'));
+    }, [productDetail],
+    //  console.log('use Effect')
+     );
 
     const handleAddToCart = () => {
       if (currentProduct) {

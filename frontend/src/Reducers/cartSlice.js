@@ -5,6 +5,9 @@ const generateUniqueId = () => {
   return uuidv4();
 };
 
+
+// TO DO:
+//push row total price / item (in component remove qty * price)
 // db id: _id / cart item id: id
 export const cartSlice = createSlice({
   name: "cart",

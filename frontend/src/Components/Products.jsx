@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import online from "../assets/online.svg";
 
@@ -33,7 +33,7 @@ const Products = () => {
     <ProductsWrapper>
       <h1>Products</h1>
 
-      <ul>
+      <Ul>
         {allProducts.map((product) => (
           <List key={product._id}>
             <Link to={`/product/${product._id}`}>
@@ -47,7 +47,7 @@ const Products = () => {
             </Link>
           </List>
         ))}
-      </ul>
+      </Ul>
       {/* <Products allProducts={allProducts} /> */}
     </ProductsWrapper>
   );
@@ -61,14 +61,22 @@ const ProductsWrapper = styled.div`
 
 const List = styled.li`
   border: 1px solid white;
-  margin-bottom: 5%;
-  padding: 5%;
+  margin: 2%;
+  padding: 2%;
   background-color: #464040;
+  width: calc(40% );
 `;
 
-{
+const Ul = styled.ul `
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 0;
+  list-style: none;
+`
+
   /* <p>{product.images[1]}</p> */
-}
+//}
 
 {
   /* <img src={require(`../assets/${product.images}`).default}
