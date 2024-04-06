@@ -23,9 +23,12 @@ export const cartSlice = createSlice({
       } else {
         state.items.push({ ...itemToAdd, quantity: 1, id: generateUniqueId() });
       }
-    }
+    },
+    clearCart: state => {
+      state.items = [];
+    },
   },
 });
 
-export const { addToCart } = cartSlice.actions;
+export const { addToCart, clearCart } = cartSlice.actions;
 export default cartSlice.reducer;

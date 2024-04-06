@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { clearCart } from "../Reducers/cartSlice";
 
 
 // only possible to order one item but multiple of same product
@@ -7,7 +8,9 @@ import { useSelector } from "react-redux";
 
 const CreateOrder = ({ toOrder }) => {
   const userId = useSelector((store) => store.user.id);
+  const dispatch = useDispatch();
   //const productId = useSelector((state) => state.cart.items)
+  console.log('order', toOrder)
 
   const submitOrder = async () => {
     try {
@@ -19,7 +22,9 @@ const CreateOrder = ({ toOrder }) => {
             headers: {
               "Content-Type": "application/json",
             },
-            body: JSON.stringify({ quantity }),
+            body: JSON.stringify({
+               quantity: quantity
+               }),
           }
         );
 
@@ -32,11 +37,15 @@ const CreateOrder = ({ toOrder }) => {
 
         const data = await response.json();
         console.log(`order created for product with id ${productId}:`, data);
+        //console.log(data)
       }
+       setTimeout(() => {
+        dispatch(clearCart());
+      }, 1000);
     } catch (error) {
       console.error("errorr creating order:", error.message);
       throw error;
-    }
+    } 
   };
   return (
     <div>
