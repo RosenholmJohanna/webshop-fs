@@ -4,6 +4,8 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const bcrypt = require("bcrypt");
 
+//const Order = require('./path/to/orderModel');
+
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/webshop";
 mongoose.connect(mongoUrl).then(() => {
   console.log("Connected to the Database successfully");
@@ -16,6 +18,11 @@ const app = express();
 // middlewares to enable cors and json body parsing
 app.use(cors());
 app.use(express.json());
+
+// APP LISTEN
+app.listen(port, () => {
+  console.log(`Server running on http://localhost:${port}`);
+});
 
 app.get("/", (req, res) => {
   res.send("My webbshop project");
@@ -57,6 +64,7 @@ const UserSchema = new mongoose.Schema({
 });
 
 const User = mongoose.model("User", UserSchema);
+
 
 // PRODUCT SCHEMA
 const productSchema = new mongoose.Schema({
@@ -256,13 +264,13 @@ app.post("/buy/:userId/:productId", async (req, res) => {
 
     if (!user || !product) {
       return res.status(404).json({
-         message: "user or product not found"
+        message: "user or product not found",
       });
     }
 
     if (product.countInStock < quantity) {
-      return res.status(400).json({ 
-        message: "Product not in stock"
+      return res.status(400).json({
+        message: "Product not in stock",
       });
     }
 
@@ -284,19 +292,14 @@ app.post("/buy/:userId/:productId", async (req, res) => {
     await user.save();
     await product.save();
 
-    res.status(200).json({ 
-      message: "product bought successfully", order 
+    res.status(200).json({
+      message: "product bought successfully",
+      order,
     });
   } catch (error) {
     console.error(error);
     res.status(500).json({
-      message: "Internal server error."
+      message: "Internal server error.",
     });
   }
-});
-
-
-
-app.listen(port, () => {
-  console.log(`Server running on http://localhost:${port}`);
 });

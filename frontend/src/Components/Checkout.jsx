@@ -2,13 +2,15 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 //import { useLocation } from "react-router-dom";
+import CreateOrder from "./CreateOrder";
 
 // create orderlist by getting the items from cart state
 
 const Checkout = () => {
   const username = useSelector((store) => store.user.username);
+  const userId = useSelector((store) => store.user.id);
   const toOrder = useSelector((state) => state.cart.items);
-  console.log("checkout");
+  console.log("checkout", toOrder);
 
 
   //products.reduce((price, item) => price + item.price, 0)
@@ -20,10 +22,11 @@ const Checkout = () => {
     <CheckoutWrapper>
       <div>
         <h4>User information </h4>
-        <p>{username}</p>
+        <p>{username} {userId}</p>
         <h4>Items ready to order </h4>
         {toOrder &&
           toOrder.map((item) => (
+            
             <OrderList key={item.id}>
               <div>{item.title}</div>
               <div>{item.price}</div>
@@ -35,6 +38,7 @@ const Checkout = () => {
           ))}
         <p>To Pay: SEK {totalSum}</p>
       </div>
+      <CreateOrder toOrder = {toOrder} />
     </CheckoutWrapper>
   );
 };

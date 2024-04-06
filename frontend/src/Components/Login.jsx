@@ -31,7 +31,7 @@ const Login = () => {
           dispatch(user.actions.setId(data.response.id));
           dispatch(user.actions.setUsername(data.response.username));
           navigate("/products");
-          //console.log(data)
+          console.log(data)
         } else {
           console.log("Login failed");
           dispatch(user.actions.setUsername(null));
