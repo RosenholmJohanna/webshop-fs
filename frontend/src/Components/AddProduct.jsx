@@ -17,7 +17,6 @@ export const AddProduct = ({ productDetail }) => {
 
     const handleAddToCart = () => {
       if (currentProduct) {
-        //console.log('current prduct', currentProduct)
         dispatch(addToCart(currentProduct));
       }
     };

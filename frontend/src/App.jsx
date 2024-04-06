@@ -13,6 +13,8 @@ import { configureStore } from "@reduxjs/toolkit";
 import { cartSlice } from "./Reducers/cartSlice";
 import Cart from "./Components/Cart";
 import Checkout from "./Components/Checkout";
+//import SearchProduct from "./Components/search/Search";
+//import ProductList from "./Components/search/ProductsList";
 
 
 
@@ -28,6 +30,7 @@ function App() {
     <BrowserRouter>
       <Provider store={store}>
          <Header /> 
+         {/* <ProductList /> */}
         <Routes>
           <Route path="/" element={<Register />}></Route>
           <Route path="/login" element={<Login />}></Route>

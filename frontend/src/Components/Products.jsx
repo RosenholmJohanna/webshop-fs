@@ -2,6 +2,11 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import online from "../assets/online.svg";
+import ProductList from "./search/ProductsList";
+
+// TO DO
+// handle fetch in reducer- productSlice = reduce api calls, and handle all products + serach there
+// let user put items to cart not only from productDetail page
 
 const API_All_PRODUCTS = "http://localhost:8080/products";
 
@@ -31,6 +36,7 @@ const Products = () => {
 
   return (
     <ProductsWrapper>
+      <ProductList />
       <h1>Products</h1>
 
       <Ul>
