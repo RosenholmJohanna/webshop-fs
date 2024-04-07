@@ -32,7 +32,7 @@ const HeaderWrapper = styled.div`
   justify-content: space-between;
   background-color: #3a3845;
   height: 10vh;
-  margin-bottom: 10%;
+  //margin-bottom: 10%;
   position: absolute;
   top: 0;
   width: 100%;

@@ -18,7 +18,11 @@ const SearchProduct = ({ productList }) => {
 
   const handleChange = useCallback(() => {
     const inputValue = inputRef.current.value;
-    filterProducts(inputValue);
+    if (inputValue.trim() === "") {
+      setFilteredProducts([]);
+    } else {
+      filterProducts(inputValue);
+    }
   }, [filterProducts]);
 
   return (

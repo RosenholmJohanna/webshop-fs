@@ -45,7 +45,9 @@ const ProductDetails = () => {
 
 export default ProductDetails;
 
-const ProductWrapper = styled.div``;
+const ProductWrapper = styled.div`
+margin-top: 25%
+`
 
 // const List = styled.li`
 // border: 1px solid white;
