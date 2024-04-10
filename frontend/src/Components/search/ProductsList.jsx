@@ -35,7 +35,7 @@ const ProductList =() => {
 
 
 const ProductListWrapper = styled.div`
-margin-top: 20%;
+
 `
 
 export default ProductList;

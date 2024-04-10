@@ -1,4 +1,5 @@
 import React, {useEffect, useState }from "react";
+import { Button } from 'react-bootstrap';
 import { useDispatch } from "react-redux";
 import { addToCart } from "../Reducers/cartSlice";
 
@@ -28,7 +29,7 @@ export const AddProduct = ({ productDetail }) => {
     // };
   
     return (
-      <button onClick={handleAddToCart}>Add to Cart</button>
+      <Button variant='primary' onClick={handleAddToCart}>Add to Cart</Button>
     );
   };
   

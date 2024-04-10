@@ -21,6 +21,9 @@ export const user = createSlice({
     setId: (store, action) => {
       store.id = action.payload;
     },
+    setIsLoggedIn: (state, action) => {
+      state.isLoggedIn = action.payload;
+    },
   },
 });
 

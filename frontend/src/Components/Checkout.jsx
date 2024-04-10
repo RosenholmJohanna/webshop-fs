@@ -12,7 +12,6 @@ const Checkout = () => {
   const toOrder = useSelector((state) => state.cart.items);
   console.log("checkout", toOrder);
 
-
   //products.reduce((price, item) => price + item.price, 0)
   const totalSum = toOrder.reduce((total, item) => {
     return total + item.quantity * item.price;
@@ -22,11 +21,12 @@ const Checkout = () => {
     <CheckoutWrapper>
       <div>
         <h4>User information </h4>
-        <p>{username} {userId}</p>
+        <p>
+          {username} {userId}
+        </p>
         <h4>Items ready to order </h4>
         {toOrder &&
           toOrder.map((item) => (
-            
             <OrderList key={item.id}>
               <div>{item.title}</div>
               <div>{item.price}</div>
@@ -38,7 +38,7 @@ const Checkout = () => {
           ))}
         <p>To Pay: SEK {totalSum}</p>
       </div>
-      <CreateOrder toOrder = {toOrder} />
+      <CreateOrder toOrder={toOrder} />
     </CheckoutWrapper>
   );
 };

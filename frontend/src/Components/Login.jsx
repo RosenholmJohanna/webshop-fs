@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { user } from "../Reducers/user";
 import styled from "styled-components";
@@ -11,6 +11,14 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const userId = useSelector((state) => state.user.id);
+
+  useEffect(() => {
+    console.log('useEffect')
+    if (userId) {
+      navigate("/products");
+    }
+  }, [userId, navigate]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -30,7 +38,7 @@ const Login = () => {
         if (data.success) {
           dispatch(user.actions.setId(data.response.id));
           dispatch(user.actions.setUsername(data.response.username));
-          navigate("/products");
+          dispatch(user.actions.setIsLoggedIn(true));
           console.log(data)
         } else {
           console.log("Login failed");

@@ -11,7 +11,6 @@ const Register = () => {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  //const isLoading = useSelector(state => state.user.isLoading);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -66,7 +65,6 @@ const Register = () => {
 
         <button type="submit">Register</button>
       </form>
-
       <a>Already a user? Loggin here</a>
     </LoginWrapper>
   );

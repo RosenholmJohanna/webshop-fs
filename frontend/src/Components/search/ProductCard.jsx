@@ -1,4 +1,5 @@
 import React from "react";
+import { Card, Button } from "react-bootstrap";
 import online from "../../assets/online.svg";
 import { Link } from "react-router-dom";
 
@@ -6,15 +7,16 @@ import { Link } from "react-router-dom";
 const ProductCard = ({ product }) => {
 
   return (
-    <div>
-      <Link to={`/product/${product._id}`}>View Details 
-      <img src={online} alt="online" width="200" height="70" />
-      <h3>{product.title}</h3>
-      <p>{product.description}</p>
-      <p>Price: {product.price}</p>
+    <Card style={{ width: "18rem" }}>
+    <Card.Img variant="top" src={online} alt="online" width="250" height="120" />
+    <Card.Body>
+      <Card.Title>{product.title}</Card.Title>
+      <Card.Text>Price: {product.price} kr</Card.Text>
+      <Link to={`/product/${product._id}`} className="btn btn-primary">
+        View Details
       </Link>
-    </div>
-  );
+    </Card.Body>
+  </Card>
+);
 };
-
 export default ProductCard;

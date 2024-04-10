@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
+import { Card, Button, Container, Row, Col } from 'react-bootstrap';
 import { useParams } from "react-router-dom";
-import styled from "styled-components";
 import online from "../assets/online.svg";
 import AddProduct from "./AddProduct";
 import Cart from "./Cart";
@@ -32,26 +32,20 @@ const ProductDetails = () => {
     return <p>Loading...</p>;
   }
 
+  
   return (
-    <ProductWrapper key={productDetail._id}>
-      <h2>{productDetail.title}</h2>
-      <img src={online} alt="Logo" width="250" height="162" />
-      <p>{productDetail.description}</p>
-      <p>Price: {productDetail.price} kr</p>
-      <AddProduct productDetail={productDetail} />
-    </ProductWrapper>
+    <Container className="d-flex justify-content-center align-items-center vh-100">
+      <Card style={{ minwidth: '22rem' }}>
+        <Card.Img variant="top" src={online} alt="Logo" width="450" height="362" />
+        <Card.Body>
+          <Card.Title>{productDetail.title}</Card.Title>
+          <Card.Text>{productDetail.description}</Card.Text>
+          <Card.Text>Price: {productDetail.price} kr</Card.Text>
+          <AddProduct productDetail={productDetail} />
+        </Card.Body>
+      </Card>
+    </Container>
   );
 };
-
 export default ProductDetails;
 
-const ProductWrapper = styled.div`
-margin-top: 25%
-`
-
-// const List = styled.li`
-// border: 1px solid white;
-// margin-bottom: 5%;
-// padding: 5%;
-// background-color: #464040;
-// `
