@@ -8,7 +8,7 @@ import CreateOrder from "./CreateOrder";
 
 const Checkout = () => {
   const username = useSelector((store) => store.user.username);
-  const userId = useSelector((store) => store.user.id);
+  //const userId = useSelector((store) => store.user.id);
   const toOrder = useSelector((state) => state.cart.items);
   console.log("checkout", toOrder);
 
@@ -22,7 +22,7 @@ const Checkout = () => {
       <div>
         <h4>User information </h4>
         <p>
-          {username} {userId}
+          {username} 
         </p>
         <h4>Items ready to order </h4>
         {toOrder &&

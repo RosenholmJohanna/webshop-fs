@@ -39,7 +39,7 @@ const Login = () => {
           dispatch(user.actions.setId(data.response.id));
           dispatch(user.actions.setUsername(data.response.username));
           dispatch(user.actions.setIsLoggedIn(true));
-          console.log(data)
+          
         } else {
           console.log("Login failed");
           dispatch(user.actions.setUsername(null));
@@ -79,7 +79,23 @@ const Login = () => {
 
 export default Login;
 
-const LoginWrapper = styled.div`
-  display: flexbox;
+export const LoginWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   margin-top: 50%;
+  margin-bottom: 50%;
+  text-align: center;
+
+  input {
+  margin: 5%;
+  }
+
+  button {
+    background-color: #18618c;
+    padding: 2%;
+    color: white;
+    width: 35%;
+    border-style: none;
+  }
 `;

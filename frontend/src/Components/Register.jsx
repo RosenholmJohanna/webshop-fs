@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { user } from "../Reducers/user";
-import styled from "styled-components";
+import { LoginWrapper } from "./Login";
 
 const API_REGISTER = "http://localhost:8080/register";
 
@@ -30,10 +30,12 @@ const Register = () => {
         if (data.success) {
           dispatch(user.actions.setUsername(data.response.username));
           dispatch(user.actions.setId(data.response.id));
+          dispatch(user.actions.setIsLoggedIn(true));
           navigate("/products");
         } else {
           console.log("Login failed");
           dispatch(user.actions.setUsername(null));
+          dispatch(user.actions.setIsLoggedIn(false));
         }
       })
       .catch((error) => {
@@ -65,14 +67,10 @@ const Register = () => {
 
         <button type="submit">Register</button>
       </form>
-      <a>Already a user? Loggin here</a>
     </LoginWrapper>
   );
 };
 
 export default Register;
 
-const LoginWrapper = styled.div`
-  display: flexbox;
-  margin-top: 50%;
-`;
+

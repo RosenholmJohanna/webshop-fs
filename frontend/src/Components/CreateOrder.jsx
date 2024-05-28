@@ -2,14 +2,14 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { clearCart } from "../Reducers/cartSlice";
 
-// only possible to order one item but multiple of same product
-// BE  needs some work.
+// only possible to order one product type (but multiple) 
+
 
 const CreateOrder = ({ toOrder }) => {
   const userId = useSelector((store) => store.user.id);
+  //const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
   const dispatch = useDispatch();
   //const productId = useSelector((state) => state.cart.items)
-  console.log("order", toOrder);
 
   const submitOrder = async () => {
     try {

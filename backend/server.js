@@ -4,6 +4,17 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const bcrypt = require("bcrypt");
 
+// const express = import('express')
+// const cors = import("cors");
+// const mongoose = import("mongoose");
+// const Schema = mongoose.Schema;
+// const bcrypt = import("bcrypt");
+
+// json: "type": "module",
+// module = import
+// ecma = stndard node syntax
+// rename node filer till cjs // es module scope
+
 //const Order = require('./path/to/orderModel');
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/webshop";
