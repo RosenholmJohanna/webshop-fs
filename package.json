@@ -1,4 +1,10 @@
 {
+  "name": "place-name-of-your-project-over-here",
+  "version": "1.0.0",
+    "scripts": {
+    "postinstall": "npm install --prefix backend"
+  },
+  
   "dependencies": {
     "bootstrap": "^5.3.3"
   }
